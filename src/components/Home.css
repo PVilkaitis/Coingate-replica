@@ -6,7 +6,6 @@
   align-items: center;
   z-index: 0;
   overflow-x: hidden;
-  
 }
 .home-background{
   position: absolute;
@@ -19,7 +18,6 @@
   border-radius: 50px;
   z-index: 0;
 }
-
 .home-content{
     position: absolute;
     display: flex;
@@ -37,7 +35,6 @@
     margin-right: 100px;
     color: #ffffff;
 }
-
 .home-text{
     display: flex;
     flex-direction: column;
@@ -49,21 +46,18 @@
     width: fit-content;
     cursor: pointer;
 }
-
 .home-text>p{
     width: 450px;
     color: #ffffff;
     font-size: 17px;
     line-height: 24px;
 }
-
 @media screen and (max-width: 1250px){
     .home-background{
         left: -50%;
         margin-top: -700px;
       }
 }
-
 @media screen and (max-width: 980px){
     .home-background{
         margin-top: -400px;

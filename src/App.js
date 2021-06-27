@@ -11,8 +11,6 @@ import Header from "./components/Header.js";
 import StartNowPage from "./components/StartNowPage.js";
 import BuyPage from "./components/BuyPage.js";
 
-import "./App.css";
-
 function App() {
   return (
     <React.Fragment>

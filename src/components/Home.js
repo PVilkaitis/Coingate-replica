@@ -10,18 +10,19 @@ import "./Home.css";
 const Home = () => {
   const [currencies, setCurrencies] = useState([]);
   const [rates, setRates] = useState([]);
+  const [cryptos, setCryptos] = useState([]);
+  const [fiats, setFiats] = useState([]);
 
   const getCurrencies = async () => {
     await axios
       .get("https://api.coingate.com/v2/currencies")
       .then((response) => setCurrencies(response.data))
-
       .catch((error) => {
         console.log(error);
       });
   };
   const getRates = async () => {
-    //calling only once for render since of api delay
+    //calling only once for render since of api delay, so rates might be inaccurate a bit
     await axios
       .get("https://api.coingate.com/v2/rates")
       .then((response) => setRates(response.data.trader.buy))
@@ -29,6 +30,48 @@ const Home = () => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    currencies.map((item) => {
+      if (item.kind === "crypto") {
+        cryptos.push({
+          label: (
+            <div>
+              <img
+                src={
+                  "https://cryptoicon-api.vercel.app/api/icon/" +
+                  item.symbol.toLowerCase()
+                }
+                height="15px"
+                width="15px"
+                alt=""
+              />
+              {item.symbol}
+            </div>
+          ),
+          value: item.symbol,
+        });
+      } else {
+        fiats.push({
+          label: (
+            <div>
+              <img
+                src={
+                  "https://cryptoicon-api.vercel.app/api/icon/" +
+                  item.symbol.toLowerCase()
+                }
+                height="15px"
+                width="15px"
+                alt=""
+              />
+              {item.symbol}
+            </div>
+          ),
+          value: item.symbol,
+        });
+      }
+    });
+  }, [currencies]);
 
   useEffect(() => {
     getCurrencies();
@@ -40,8 +83,11 @@ const Home = () => {
       <div className="home-background"></div>
       <div className="home-content">
         <div className="home-form-section">
-          <h1>Buy Bitcoin, Ethereum, Litecoin and other crypto online </h1>
-          <Form currencies={currencies} rates={rates} />
+          <h1>
+            <font color="#16DFB5">Buy Bitcoin,</font> Ethereum, Litecoin and
+            other crypto <font color="#16DFB5">online</font>
+          </h1>
+          <Form rates={rates} cryptos={cryptos} fiats={fiats} />
         </div>
         <div className="home-text">
           <p>
@@ -58,7 +104,6 @@ const Home = () => {
             >
               <p className="start-now-p">Start now</p>
             </Link>
-
             <NavigateNextIcon
               style={{ fontSize: 20, marginLeft: 3, marginTop: 3 }}
             />

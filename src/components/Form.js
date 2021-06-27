@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import Select from "react-select";
 
+import { styles, stylesPayment, DUMMY_METHODS } from "./SelectStyles";
 import "./Form.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-const Form = ({ currencies, rates }) => {
+const Form = ({ rates, cryptos, fiats }) => {
   const [pair, setPair] = useState({
     fiat: "EUR",
     crypto: "BTC",
@@ -69,24 +70,28 @@ const Form = ({ currencies, rates }) => {
                 value={isNaN(amounts.fiat) ? "" : amounts.fiat}
                 onChange={(e) => fiatHandler(e.target.value)}
               ></input>
-              <select
-                className="form-select"
-                onChange={(e) => {
-                  setPair({ ...pair, fiat: e.target.value });
+
+              <Select
+                value={{
+                  label: (
+                    <div className="react-select">
+                      <img
+                        src={`https://cryptoicon-api.vercel.app/api/icon/${pair.fiat.toLowerCase()}`}
+                        height="15px"
+                        width="15px"
+                        alt=""
+                      />
+                      {pair.fiat}
+                    </div>
+                  ),
+                  value: pair.fiat,
                 }}
-                value={pair.fiat}
-              >
-                <option value="EUR" hidden>
-                  EUR
-                </option>
-                {currencies.map((item) =>
-                  item.kind === "fiat" ? (
-                    <option key={uuidv4()} value={item.symbol}>
-                      {item.symbol}
-                    </option>
-                  ) : null
-                )}
-              </select>
+                styles={styles}
+                options={fiats}
+                onChange={(value) => {
+                  setPair({ ...pair, fiat: value.value });
+                }}
+              />
             </div>
             <div className="form-pay">
               <p>Buy</p>
@@ -94,33 +99,48 @@ const Form = ({ currencies, rates }) => {
                 type="number"
                 value={isNaN(amounts.crypto) ? "" : amounts.crypto}
                 onChange={(e) => cryptoHandler(e.target.value)}
-                maxLength={11}
               ></input>
-              <select
-                className="form-select"
-                onChange={(e) => {
-                  setPair({ ...pair, crypto: e.target.value });
+
+              <Select
+                value={{
+                  label: (
+                    <div className="react-select">
+                      <img
+                        src={`https://cryptoicon-api.vercel.app/api/icon/${pair.crypto.toLowerCase()}`}
+                        height="15px"
+                        width="15px"
+                        alt=""
+                      />
+                      {pair.crypto}
+                    </div>
+                  ),
+                  value: pair.crypto,
                 }}
-                value={pair.crypto}
-              >
-                <option value="BTC" hidden>
-                  BTC
-                </option>
-                {currencies.map((item) =>
-                  item.kind === "crypto" ? (
-                    <option key={uuidv4()} value={item.symbol}>
-                      {item.symbol}
-                    </option>
-                  ) : null
-                )}
-              </select>
+                styles={styles}
+                options={cryptos}
+                onChange={(value) => {
+                  setPair({ ...pair, crypto: value.value });
+                }}
+              />
             </div>
             <p>Payment method</p>
-            <select className="form-payment" name="paymentMethod">
-              <option value="BankTransfer">Bank transfer</option>
-              <option value="PayPal">PayPal</option>
-              <option value="DebitCard">Debit card</option>
-            </select>
+            <Select
+              defaultValue={{
+                label: (
+                  <div className="react-select">
+                    <img
+                      src="https://www.eurodebit.com/img/sepa.png"
+                      width="40px"
+                      alt=""
+                    />
+                    Bank transfer
+                  </div>
+                ),
+                value: "Bank transfer",
+              }}
+              options={DUMMY_METHODS}
+              styles={stylesPayment}
+            />
 
             {enabled === true ? (
               <Link to="/buy">
