@@ -36,12 +36,17 @@ const Home = () => {
       if (item.kind === "crypto") {
         cryptos.push({
           label: (
-            <div>
+            <div className="react-select">
               <img
                 src={
                   "https://cryptoicon-api.vercel.app/api/icon/" +
                   item.symbol.toLowerCase()
                 }
+                onError={(e) => (
+                  (e.target.onerror = null),
+                  (e.target.src =
+                    "https://www.iconpacks.net/icons/2/free-cryptocurrency-coin-icon-2422-thumb.png")
+                )}
                 height="15px"
                 width="15px"
                 alt=""
@@ -54,12 +59,17 @@ const Home = () => {
       } else {
         fiats.push({
           label: (
-            <div>
+            <div className="react-select">
               <img
                 src={
                   "https://cryptoicon-api.vercel.app/api/icon/" +
                   item.symbol.toLowerCase()
                 }
+                onError={(e) => (
+                  (e.target.onerror = null),
+                  (e.target.src =
+                    "http://simpleicon.com/wp-content/uploads/coin-money-2.png")
+                )}
                 height="15px"
                 width="15px"
                 alt=""
