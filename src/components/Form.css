@@ -1,0 +1,119 @@
+.form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 330px;
+    height: 400px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin-left: 40px;
+    border: 1px solid #E9E9E9;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.001);
+    z-index: 10;
+}
+.loader{
+    padding-top: 70px;
+}
+.form>p{
+    font-size: 13px;
+    margin-right: 190px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+}
+.form-shadow{
+    position: relative;
+    width: 330px;
+    height: 400px;
+    margin-bottom: -370px;
+    background-color: #E9F6FF;
+    transform: rotate(-5.53deg);
+    border-radius: 20px;
+    z-index: 1;
+}
+.form-pay{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    height: 35px;
+    width: 290px;
+    margin-bottom: 20px;
+}
+.form>div:first-child{
+    margin-top: 80px;
+}
+.form-pay>p{
+    border: none;
+    background-color: none;
+    border-right: none;
+    margin-left: 15px;
+    font-size: 13px;
+}
+input{
+    text-align: center;
+    border: none;
+    border-left: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+.form-select{
+    border: none;
+    outline: none;
+    width: 70px;
+    font-size: 11px;
+    height: 80%;
+    border-left: 1px solid lightgrey;
+    margin-right: 15px;
+    padding-left: 15px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    appearance: none;
+    background: url(https://cdn.iconscout.com/icon/free/png-512/keyboard-down-arrow-1780093-1518654.png) 100% 50%  no-repeat scroll transparent;
+    background-size: 20px;
+}
+.form-payment{
+    appearance: none;
+    background: url(https://cdn.iconscout.com/icon/free/png-512/keyboard-down-arrow-1780093-1518654.png) 95% 50%  no-repeat scroll transparent;
+    background-size: 20px;
+    padding-left: 15px;
+    width: 290px;
+    margin-bottom: 70px;
+    height: 35px;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+}
+button{
+    border: none;
+    outline: none;
+    height: 35px;
+    width: 290px;
+    color: #ffffff;
+    background: #16DFB5;
+    padding: 0px 25px 0px 35px;
+    border-radius: 10px 50px 50px 35px;
+    font-size: 12px; 
+}
+@media screen and (max-width: 500px){
+    .form-shadow{
+        display: none;
+    }
+    .form{
+        margin-left: 0px;
+        width: 300px;
+    }
+    .form-pay{
+        width: 275px;
+    }
+    .form>p{
+        margin-right: 175px;
+    }
+}
